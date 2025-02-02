@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real Bluetooth Connection</title>
+</head>
+<body>
+    <button id="connect-btn">🔗 Connect to Bluetooth Device</button>
+    <p id="status">Status: Not Connected</p>
+
+    <script>
+        const connectButton = document.getElementById('connect-btn');
+        const statusDisplay = document.getElementById('status');
+
+        connectButton.addEventListener('click', async () => {
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    acceptAllDevices: true
+                });
+
+                statusDisplay.textContent = `Status: Connected to ${device.name}`;
+                console.log('Device:', device);
+            } catch (error) {
+                statusDisplay.textContent = 'Status: Connection Failed';
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
